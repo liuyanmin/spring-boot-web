@@ -1,0 +1,135 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /spring-boot-web
+
+# 当前项目maven激活环境
+spring:
+  profiles:
+    active: '@profileActive@'
+---
+
+spring:
+  application:
+    name: spring-boot-web
+  banner:
+    charset: UTF-8
+    location: banner.txt
+  http:
+    encoding:
+      charset: UTF-8
+---
+# datasource config
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      filter:
+        stat:
+          log-slow-sql: true
+          merge-sql: true
+          slow-sql-millis: 3000
+        wall:
+          config:
+            delete-allow: true
+            drop-table-allow: false
+          enabled: true
+        log4j:
+          enabled: true
+      filters: stat,wall,log4j
+      initial-size: 10
+      max-active: 100
+      max-pool-prepared-statement-per-connection-size: 20
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      min-idle: 10
+      pool-prepared-statements: true
+      stat-view-servlet:
+        enabled: true
+        login-username: druid
+        login-password: druid123
+        url-pattern: /druid/*
+        # IP白名单 (没有配置或者为空，则允许所有访问, 可配置多个)
+        allow:
+        # IP黑名单 (存在共同时，deny优先于allow)
+        # deny: 127.0.0.1
+        # 禁用HTML页面上的“Reset All”功能
+        reset-enable: false
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      validation-query: SELECT 1 FROM DUAL
+    type: com.alibaba.druid.pool.DruidDataSource
+
+# mybatis config
+mybatis:
+  configuration:
+    default-statement-timeout: 60
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.lym.springboot.web.domain
+
+# pagehelper config
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  # PageHelper 分页默认页数
+  default-pageNum: 1
+  # PageHelper 分页默认每页数量
+  default-pageSize: 10
+
+# swagger config
+swagger:
+  enable: true
+  author: Liuyanmin
+
+# interceptor config
+spring-boot-web:
+  login:
+    # 是否支持单账号多端登录
+    multi: true
+    # 不操作token过期时间，单位：分钟
+    expire-minutes: 30
+    # rsa 公钥
+    public-key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFfwKfixyvhDHOSiVa5MGaDStsV5Cws+VyOD39pjVL7KvO66bLP8BapFvj88vm3dA59rpUxjNQfuZnGomcE0KiGh7cbcJkvun4CC9wyRxVgmZtDC46nrt2YgUDi+EgFNEWRCkg0yjUsU8vApBuAFTk8+4FjQICrGwkRZZtGRMcewIDAQAB
+    # 登录密码解密私钥（rsa解密）
+    private-key: MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAIV/Ap+LHK+EMc5KJVrkwZoNK2xXkLCz5XI4Pf2mNUvsq87rpss/wFqkW+Pzy+bd0Dn2ulTGM1B+5mcaiZwTQqIaHtxtwmS+6fgIL3DJHFWCZm0MLjqeu3ZiBQOL4SAU0RZEKSDTKNSxTy8CkG4AVOTz7gWNAgKsbCRFlm0ZExx7AgMBAAECgYBb/8ziAK/zMapVXXni6xWVQhAz6SDY9hFhJutp29qNCXzZ7EMVfUjl7rE5JnHWF/WBjMya0cDZb6r/USWWvxtCtcYPoEllZoyMJsomyM6EdJpZeafeXNk7vJ48ohN9tfuooiCFTO55u5Evm9gV1uW/N59z1THoVKOEUzOJH56P4QJBAMsx0tOCH680D1Wla9WeG/fK/phozfCyAVr9EavSVFcqQGG0AnIXHObDds3voLHDsfdTEY/kbYaBX/Bz+hsp4isCQQCoMEUzYWbQtEc73UIFAXw7T7vD4dsLjThkErlhIwmyOnamegq1UjqCQVYETbh+ZC6zFg5b16hqpMnn6TSEYJbxAkEAtyJ5rI279tHJ/FwyW368IFJBsqXK7uPQWux5z82qnEEFc8mk5qU0NDv5SNRvlagWLx4cVv7/Q9o42OP+iBrwrwJBAJ0oldFAJ6nHe3S1+HXjAGoPxF1yk5NEv7fLQ0xASFQxiyNekNkD4EZMtQrKcSYxiO2xI3OwneAg4cYBxSAZfZECQQCKXL13ZW+m+4cCuG6btB3ZGsnyszgNILEuiMn0F5loaEWTAMUdD02MCAMA6NG8fvO9TPR5AajrBossauWGlvre
+    # 新建用户初始密码(明文)
+    init-password: 123456
+  # 邮箱配置
+  mail:
+    protocol: smtp
+    host: smtp.163.com
+    from: ***@163.com
+    from-password: ***
+    from-name: spring-boot-web
+    message-type: text/html;charset=UTF-8
+  # jwt 配置
+  jwt:
+    secret: 6d19aa76fe4b4851971c04aaa25e3b83
+    issuer: spring-boot-web
+    subject: spring-boot-web-jwt
+    audience: web
+  # 拦截器配置
+  interceptor-config:
+    log-config:
+      enabled: true
+      response:
+        enabled: true
+      include-path: /**
+      exclude-path: /swagger-ui.html,/swagger-resources/**,/csrf,/webjars/**,/error,/
+    jwt-config:
+      enabled: true
+      include-path: /**
+      exclude-path: /admin/find/password,/admin/confirm/reset/password,/status,/login,/swagger-ui.html,/swagger-resources/**,/csrf,/webjars/**,/error,/
+    permission-config:
+      enabled: true
+      include-path: /**
+      exclude-path: /status,/logout,/login,/swagger-ui.html,/swagger-resources/**,/csrf,/webjars/**,/error,/
+
+# 项目信息
+info:
+  project-name: '@project.name@'
+  project-version: '@project.version@'

@@ -1,0 +1,16 @@
+spring:
+  # datasource config
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_boot_web?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: ***
+  # redis config
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: ***
+    db: 11
+
+# 系统网关地址
+spring-boot-web:
+  gateway: http://localhost:8888/
