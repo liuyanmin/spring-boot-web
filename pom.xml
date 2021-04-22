@@ -35,7 +35,7 @@
     <mybatis-spring-boot-starter.version>1.3.5</mybatis-spring-boot-starter.version>
     <pagehelper-spring-boot-starter.version>1.2.12</pagehelper-spring-boot-starter.version>
     <mapper-spring-boot-starter>2.1.5</mapper-spring-boot-starter>
-    <mybatis.version>3.5.0</mybatis.version>
+    <mybatis.version>3.5.6</mybatis.version>
     <log4j.version>1.2.17</log4j.version>
     <common-io>2.6</common-io>
     <jansi.version>1.18</jansi.version>
