@@ -20,7 +20,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
     <fastjson.version>1.2.62</fastjson.version>
-    <log4j-core.version>2.12.1</log4j-core.version>
+    <log4j-core.version>2.16.0</log4j-core.version>
     <commons-lang3.version>3.9</commons-lang3.version>
     <guava.version>28.1-jre</guava.version>
     <lombok.version>1.18.10</lombok.version>
