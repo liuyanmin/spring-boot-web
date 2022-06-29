@@ -39,7 +39,7 @@
     <log4j.version>1.2.17</log4j.version>
     <common-io>2.6</common-io>
     <jansi.version>1.18</jansi.version>
-    <pio.version>4.1.0</pio.version>
+    <pio.version>4.1.1</pio.version>
     <jjwt.version>0.9.1</jjwt.version>
     <hutool.version>4.6.10</hutool.version>
     <mail.version>1.4.7</mail.version>
